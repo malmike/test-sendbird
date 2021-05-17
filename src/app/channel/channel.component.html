@@ -1,0 +1,102 @@
+<ng-container *ngIf="channel$ | async as channel">
+  <cdk-virtual-scroll-viewport class="chat-history no-scrollbar" itemSize="5">
+      <div class="message" *cdkVirtualFor="let message of messages; let i = index">
+          <!--date of the messages-->
+          <div
+              *ngIf="i === 0 || !isSameDay(message.createdAt, messages[i - 1].createdAt)"
+              class="flex flex-row flex-nowrap justify-center"
+          >
+              <div class="date body-main corporate-primary-bg-100 corporate-contrast">
+                  {{ message.createdAt | date: 'fullDate':undefined:this.currentLanguageKey }}
+              </div>
+          </div>
+
+          <!--own user message-->
+          <ng-container *ngIf="message._sender?.userId === currentUser?.userId; else otherUser">
+              <div
+                  class="mrg-btm-8 flex flex-row flex-nowrap items-end justify-end"
+                  [ngClass]="{ 'background-secondary': selectedMessage === i }"
+                  (contextmenu)="userMessageSelected($event, i)"
+              >
+                  <div class="shrink-0 text-end">
+                      <div [ngSwitch]="messagesReadStatus[message.messageId]">
+                          <div *ngSwitchCase="messageReadStatus.read">
+                              <mat-icon class="success">done_all</mat-icon>
+                          </div>
+                          <div *ngSwitchCase="messageReadStatus.delivered">
+                              <mat-icon class="text-secondary">done_all </mat-icon>
+                          </div>
+                          <div *ngSwitchCase="messageReadStatus.succeeded">
+                              <mat-icon class="text-secondary">check </mat-icon>
+                          </div>
+                          <div *ngSwitchCase="messageReadStatus.pending">
+                              <mat-spinner diameter="24" class="corporate-primary"></mat-spinner>
+                          </div>
+                          <div *ngSwitchDefault>
+                              <mat-icon color="warn">close</mat-icon>
+                          </div>
+                      </div>
+                      <div class="body-sub text-secondary">
+                          {{ message.createdAt | date: 'shortTime':undefined:currentLanguageKey }}
+                      </div>
+                  </div>
+
+                  <div class="chat-message own-message body-main corporate-primary-bg corporate-contrast">
+                      {{ message.message }}
+                  </div>
+              </div>
+          </ng-container>
+
+          <!--other user message-->
+          <ng-template #otherUser>
+              <div class="mrg-btm-8 flex flex-row flex-nowrap items-end">
+                  <div class="user-image background-color mat-elevation-z1">
+                      <img [src]="message._sender?.plainProfileUrl" alt="" />
+                  </div>
+
+                  <div>
+                      <div class="nickname body-sub text-secondary">{{ message._sender?.nickname }}</div>
+                      <div
+                          *ngIf="message.messageType === 'file' && message.type.includes('image/'); else textMessage"
+                      >
+                          <img class="image-message" [src]="message?.url" alt="" />
+                      </div>
+                      <ng-template #textMessage>
+                          <div class="chat-message body-main border-background text-primary">
+                              {{ message.message }}
+                          </div>
+                      </ng-template>
+                  </div>
+
+                  <div class="shrink-0 body-sub text-secondary">
+                      {{ message.createdAt | date: 'shortTime':undefined:currentLanguageKey }}
+                  </div>
+              </div>
+          </ng-template>
+      </div>
+  </cdk-virtual-scroll-viewport>
+  <!-- </div> -->
+
+
+  <form
+    [formGroup]="chatMessageForm"
+    (ngSubmit)="sendMessage()"
+    class="chat-input background-primary flex flex-row flex-nowrap items-center"
+    >
+      <div class="textarea-container flex background-primary-75-important body-main text-primary">
+          <textarea
+              matInput
+              formControlName="message"
+              [placeholder]="'Enter message'"
+              cdkTextareaAutosize
+              class="background-primary-75-important"
+              #chatMessage
+              (keydown)="submitForm($event)"
+          ></textarea>
+      </div>
+
+      <button mat-icon-button color="primary" class="send-button" type="submit" [disabled]="!messageValueValid()">
+          <mat-icon>send</mat-icon>
+      </button>
+    </form>
+</ng-container>

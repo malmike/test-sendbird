@@ -1,0 +1,13 @@
+.separation-line-content {
+  border: 1px solid black;
+  height: 100vh;
+}
+
+.chat-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.channel {
+  flex-grow: 1;
+}

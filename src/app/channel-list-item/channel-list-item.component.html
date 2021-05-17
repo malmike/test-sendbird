@@ -1,0 +1,6 @@
+<mat-card class="channel-item" (click)="enterChannel()">
+  <div *ngIf="channel.coverUrl" class="channel-image-container">
+      <img [src]="channel.coverUrl" alt="" />
+  </div>
+  <div [title]="channel.name">{{ channel.name }}</div>
+</mat-card>

@@ -1,0 +1,1045 @@
+@import "~@angular/material/theming";
+@import "palettes.scss";
+@import "../styles/mixins.scss";
+
+@mixin background-opacity($color, $opacity: 0.5) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
+html {
+  --gradient-color-top: #3023ae;
+  --gradient-color-bottom: #814ae5;
+  --gradient-color-dark-top: #3023ae;
+  --gradient-color-dark-bottom: #814ae5;
+}
+
+/* colors and color sets light */
+$color-set-primary: mat-palette($palette-primary);
+$color-set-secondary: mat-palette($palette-secondary);
+$color-set-success: mat-palette($palette-success);
+$color-set-error: mat-palette($palette-error);
+$color-set-border: mat-palette($palette-border);
+
+$corporate-contrast: #ffffff;
+$text-primary: #212121 !important;
+$text-primary-bg: #212121;
+$text-secondary: #747476;
+$background-primary: #ffffff;
+$background-primary-75: #f1f1f2;
+$background-secondary: #fafafa;
+$gradient-color-top: var(--gradient-color-top);
+$gradient-color-bottom: var(--gradient-color-bottom);
+$border-color: mat-color($color-set-border, 500);
+
+// colors for svg coloring
+$corporate-primary: mat-color($color-set-primary, 500);
+
+/* colors and color sets dark */
+$color-set-primary-dark: mat-palette($palette-primary-dark);
+$color-set-secondary-dark: mat-palette($palette-secondary-dark);
+$color-set-success-dark: mat-palette($palette-success-dark);
+$color-set-error-dark: mat-palette($palette-error-dark);
+$color-set-border-dark: mat-palette($palette-border-dark);
+
+$corporate-contrast-dark: #3f3553;
+$text-primary-dark: #ededed !important;
+$text-primary-bg-dark: #ededed;
+$text-secondary-dark: #a1a1a4;
+$background-primary-dark: #242424;
+$background-mat-card-dark: #424242;
+$background-secondary-dark: #121212;
+$gradient-color-dark-top: var(--gradient-color-dark-top);
+$gradient-color-dark-bottom: var(--gradient-color-dark-bottom);
+
+$theme: mat-light-theme(
+  $color-set-primary,
+  $color-set-secondary,
+  $color-set-error
+);
+/* light theme */
+@mixin light-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $error: map-get($theme, warn);
+
+  body {
+    background-color: $background-primary;
+    color: $text-primary;
+  }
+
+  a,
+  a:hover,
+  a:active {
+    color: mat-color($primary, 500);
+    text-decoration: none;
+  }
+
+  button:focus {
+    border: none;
+    outline: none;
+  }
+
+  .corporate-primary {
+    color: mat-color($primary, 500);
+
+    &-important {
+      color: mat-color($primary, 500) !important;
+    }
+  }
+  .corporate-primary-300 {
+    color: mat-color($primary, 300);
+  }
+  .corporate-primary-bg {
+    background-color: mat-color($primary, 500) !important;
+  }
+  .corporate-primary-bg-100 {
+    background-color: mat-color($primary, 100);
+  }
+  .corporate-primary-border {
+    border-color: mat-color($primary, 500);
+  }
+
+  .corporate-secondary {
+    color: mat-color($accent, 500);
+  }
+  .corporate-secondary-border {
+    border-color: mat-color($accent, 500);
+  }
+
+  .corporate-contrast {
+    color: $corporate-contrast;
+  }
+  .corporate-contrast-bg {
+    background-color: $corporate-contrast !important;
+  }
+
+  .text-primary {
+    color: $text-primary;
+  }
+  .text-secondary {
+    color: $text-secondary;
+  }
+  .text-secondary-bg {
+    background-color: $text-primary-bg;
+  }
+
+  .background-primary {
+    background-color: $background-primary !important;
+  }
+  .background-primary-75 {
+    background-color: $background-primary-75;
+  }
+  .background-primary-75-important {
+    background-color: $background-primary-75 !important;
+  }
+  .background-secondary {
+    background-color: $background-secondary;
+  }
+  .background-primary-border {
+    border-color: $background-primary;
+  }
+
+  .border-text {
+    color: mat-color($color-set-border, 500);
+  }
+  .border-text-800 {
+    color: mat-color($color-set-border, 800);
+  }
+  .border-background {
+    background-color: mat-color($color-set-border, 500);
+  }
+  .border-background-900 {
+    background-color: mat-color($color-set-border, 900);
+  }
+  .border-color {
+    border-color: mat-color($color-set-border, 500);
+  }
+  .border-corporate-contrast {
+    border-color: $corporate-contrast;
+  }
+
+  .success {
+    color: mat-color($color-set-success, 500);
+  }
+
+  .error {
+    color: mat-color($error, 500);
+  }
+  .suffix-error {
+    color: mat-color($error, 500);
+  }
+
+  .project-highlight {
+    color: mat-color($accent, 500);
+  }
+
+  .restriction-status {
+    background-color: mat-color($color-set-border, 50);
+
+    .restriction-status-icon {
+      color: $text-secondary;
+    }
+  }
+
+  /*** typing indicator ***/
+  .ticontainer .dot {
+    background-color: $text-secondary;
+  }
+
+  /*** separations lines ***/
+  .separation-line-headline,
+  .separation-line-header {
+    background-image: linear-gradient(
+      to right,
+      mat-color($color-set-border, 500) 0%,
+      rgba($background-primary, 0)
+    );
+  }
+
+  .separation-line-content {
+    background: linear-gradient(#c6c6c8, #c6c6c8) no-repeat center/1px 100%;
+  }
+
+  .separation-line-content-horizontal {
+    background-color: mat-color($color-set-border, 500);
+  }
+
+  .separation-line-border-left {
+    border-left: mat-color($color-set-border, 500) 1px solid;
+  }
+
+  .separation-line-two-gradients {
+    background-image: radial-gradient(
+      circle at 50% 0,
+      mat-color($color-set-border, 500),
+      $background-primary 100%
+    );
+  }
+
+  /*** alternative for directory image-header if color or image are missing ***/
+  .header-image {
+    background-color: $background-primary;
+
+    &.small-header {
+      background-color: transparent;
+    }
+  }
+
+  .active {
+    color: $corporate-contrast;
+    background-color: mat-color($primary, 500) !important;
+
+    .mat-icon {
+      color: $corporate-contrast !important;
+    }
+  }
+  .active-sort,
+  .active-sort:hover {
+    background-color: mat-color($primary, 100) !important;
+    color: mat-color($primary, 500) !important;
+  }
+
+  /*** dialog image viewer ***/
+  .plazz-image-viewer {
+    background-color: $background-primary;
+
+    .footer {
+      @include background-opacity($text-primary-bg, 0.7);
+    }
+  }
+
+  /*** livestream selection ***/
+  .livestream-selection {
+    .mat-select-arrow {
+      color: mat-color($primary, 500);
+    }
+  }
+
+  /*** calendar views ***/
+  .calendar-month-container,
+  .calendar-week-container {
+    .single-element {
+      border-color: mat-color($color-set-border, 500) !important;
+
+      &.current-day {
+        border-color: mat-color($primary, 500) !important;
+      }
+
+      &.past-day {
+        background-color: $background-secondary;
+        border-color: $background-secondary !important;
+
+        .button-main {
+          color: $text-secondary;
+        }
+      }
+
+      &.selected-day {
+        background-color: mat-color($primary, 500);
+
+        .button-main {
+          color: $corporate-contrast;
+        }
+      }
+    }
+
+    .single-element:hover {
+      background-color: mat-color($color-set-secondary, 500);
+
+      .button-main {
+        color: mat-color($primary, 500);
+      }
+    }
+
+    .entries-indicator {
+      background-color: mat-color($color-set-secondary, 500);
+    }
+
+    .empty-card {
+      border-color: $background-primary !important;
+    }
+  }
+
+  /* expansion panel */
+  .plazz-accordion {
+    .mat-expansion-panel:not(.mat-expanded)
+      .mat-expansion-panel-header:not([aria-disabled="true"]):hover {
+      background: $corporate-contrast;
+    }
+  }
+
+  /* delete account */
+  .delete-account a:hover {
+    color: mat-color($error, 700);
+  }
+
+  /*** livestream ***/
+  .livestream-background {
+    background: $text-primary-bg;
+  }
+
+  /*** svg style for svg-icons with only one color ***/
+  svg {
+    fill: currentColor;
+
+    g g {
+      fill: currentColor;
+    }
+  }
+  .colored-svg {
+    color: mat-color($primary, 500);
+  }
+  .colored-svg-error {
+    color: mat-color($error, 500);
+  }
+  .colored-svg-text-secondary {
+    color: $text-secondary;
+  }
+  .colored-svg-corporate-contrast {
+    color: $corporate-contrast;
+  }
+
+  /*** svg style for multi colored svg files; code directly inside html files ***/
+  svg.colored {
+    .corporate-primary {
+      fill: mat-color($primary, 500);
+    }
+
+    .error {
+      fill: mat-color($error, 500);
+    }
+  }
+
+  /*** general menu ***/
+  .general-menu {
+    a:hover,
+    a:focus {
+      color: $text-primary;
+    }
+
+    .active-menu-item {
+      background-color: mat-color($primary, 100) !important;
+      color: mat-color($primary, 500) !important;
+
+      .mat-icon {
+        color: mat-color($primary, 500) !important;
+      }
+    }
+
+    .mat-menu-item.logout {
+      color: mat-color($primary, 500) !important;
+    }
+  }
+
+  .plazz-general-menu-content {
+    .mat-sidenav-container {
+      background-color: $background-primary;
+    }
+
+    .menu-content {
+      color: $text-primary;
+
+      h1,
+      h2 {
+        color: $text-primary;
+      }
+    }
+
+    a.mat-list-item.logout {
+      color: $corporate-primary;
+
+      .mat-icon {
+        color: $corporate-primary !important;
+      }
+    }
+
+    a.mat-list-item .mat-icon {
+      color: $text-primary;
+    }
+
+    a.active-menu-item .mat-list-item-content {
+      background-color: mat-color($primary, 100);
+      color: mat-color($primary, 500);
+
+      .mat-icon {
+        color: mat-color($primary, 500) !important;
+      }
+    }
+  }
+
+  a.active-menu-item {
+    color: mat-color($primary, 500);
+
+    &.menu-button-link {
+      background-color: transparent;
+    }
+
+    &.mobile {
+      background-color: mat-color($primary, 100);
+    }
+  }
+
+  /*** calendar toggle ***/
+  .calendar-toggle {
+    background-color: $background-primary-75;
+    border: 1px solid $background-primary-75 !important;
+
+    .mat-button-toggle {
+      background-color: $background-primary-75;
+      border-left: 1px solid $background-primary-75 !important;
+    }
+
+    .mat-button-toggle-checked,
+    .mat-button-toggle:hover {
+      background-color: $background-primary;
+      color: mat-color($primary, 500) !important;
+    }
+  }
+
+  /*** chat ***/
+  .channel-item:hover {
+    background-color: $background-secondary;
+  }
+
+  .settings-container .item-container {
+    border-color: mat-color($color-set-border, 500) !important;
+  }
+
+  .scroll-to-new-message {
+    background: linear-gradient(
+      to top,
+      rgba($background-primary, 1) 50%,
+      rgba($background-primary, 0) 100%
+    );
+  }
+
+  .mat-input-element {
+    color: $text-primary !important;
+  }
+
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $corporate-contrast !important;
+  }
+
+  .mat-toolbar {
+    background-color: $background-primary !important;
+  }
+
+  .plazz-toolbar-row {
+    background-image: linear-gradient(
+      $gradient-color-top,
+      $gradient-color-bottom
+    );
+    color: $corporate-contrast;
+  }
+
+  .main-content {
+    background-color: $background-primary;
+  }
+
+  .top-nav-container {
+    background-color: $gradient-color-top;
+    color: $corporate-contrast;
+
+    .mat-fab.mat-accent {
+      background-color: $corporate-contrast;
+    }
+
+    .mat-icon {
+      color: $corporate-contrast;
+    }
+  }
+
+  .project-nav-container {
+    background-color: $background-primary;
+    color: $text-secondary;
+
+    .mat-icon {
+      color: $text-secondary;
+    }
+
+    .mat-fab.mat-accent {
+      background-color: $corporate-contrast;
+    }
+  }
+
+  .project-view-container {
+    background-color: $background-primary;
+
+    .mat-sidenav {
+      .row-menu {
+        color: $text-primary;
+
+        .mat-icon {
+          color: mat-color($primary, 500);
+        }
+      }
+
+      .folder-list {
+        border-left-color: mat-color($primary, 500);
+      }
+
+      .divider-only {
+        border-bottom-color: mat-color($primary, 500);
+      }
+
+      .separator-item .separator,
+      .without-divider {
+        color: mat-color($primary, 500);
+
+        .divider {
+          border-bottom-color: mat-color($primary, 500);
+        }
+      }
+    }
+
+    .project-view-content {
+      background-color: $background-primary;
+    }
+
+    .row-menu.active {
+      background-color: mat-color($primary, 100);
+
+      a {
+        color: mat-color($primary, 500);
+      }
+    }
+  }
+
+  .profile-container .default-image,
+  .profile-img-container .default-image {
+    background-image: linear-gradient(
+      mat-color($primary, 200),
+      mat-color($primary, 500)
+    );
+  }
+
+  .plazz-tab-group {
+    .mat-ink-bar {
+      &:before,
+      &:after {
+        background-color: $background-primary;
+      }
+    }
+  }
+
+  .search-input-container.mat-form-field.mat-focused .mat-form-field-label {
+    color: $text-secondary;
+  }
+
+  .search-input-container.mat-form-field-appearance-legacy {
+    .mat-form-field-underline {
+      background-color: transparent;
+    }
+
+    .mat-icon {
+      color: $text-secondary;
+    }
+  }
+
+  .mat-tab-label {
+    color: mat-color($primary, 500) !important;
+  }
+
+  .mat-tab-label-active {
+    color: mat-color($primary, 500);
+    opacity: 0.9 !important;
+  }
+
+  .mat-ink-bar {
+    background-color: mat-color($accent, 500) !important;
+  }
+
+  .plazz-snackbar.mat-snack-bar-container {
+    background-color: #000000;
+    color: $corporate-contrast;
+  }
+
+  .plazz-dialog-fullscreen .mat-dialog-container .header {
+    background-color: $background-primary;
+  }
+
+  .mat-more-menu.mat-menu-panel {
+    color: $text-primary;
+  }
+
+  .menu-folder.mat-menu-panel {
+    background-color: $background-primary;
+
+    .mat-menu-item-submenu-trigger::after {
+      color: mat-color($primary, 500);
+    }
+  }
+
+  .more-button-container .mat-button[aria-expanded="true"],
+  .folder-button.mat-button[aria-expanded="true"] {
+    color: mat-color($primary, 500);
+
+    .mat-icon {
+      color: mat-color($primary, 500);
+    }
+  }
+}
+
+/******************************************/
+/*************** dark theme ***************/
+/******************************************/
+.dark-theme {
+  $theme-dark: mat-dark-theme(
+    $color-set-primary-dark,
+    $color-set-secondary-dark,
+    $color-set-error-dark
+  );
+  @include angular-material-theme($theme-dark);
+
+  body {
+    background-color: $background-primary-dark !important;
+    color: $text-primary-dark;
+  }
+
+  a,
+  a:hover,
+  a:active {
+    color: mat-color($color-set-primary-dark, 500);
+    text-decoration: none;
+  }
+
+  button:focus {
+    border: none;
+    outline: none;
+  }
+
+  .corporate-primary {
+    color: mat-color($color-set-primary-dark, 500);
+  }
+
+  .corporate-primary-300 {
+    color: mat-color($color-set-primary-dark, 300);
+  }
+
+  .corporate-primary-bg-100 {
+    background-color: mat-color($color-set-primary-dark, 100);
+  }
+
+  .corporate-secondary {
+    color: mat-color($color-set-secondary-dark, 500);
+  }
+
+  .corporate-contrast {
+    color: $corporate-contrast-dark;
+  }
+
+  .text-primary {
+    color: $text-primary-dark;
+  }
+
+  .text-secondary {
+    color: $text-secondary-dark;
+  }
+
+  .background-primary {
+    background-color: $background-primary-dark;
+  }
+
+  .background-secondary {
+    background-color: $background-secondary-dark;
+  }
+
+  .corporate-contrast-bg {
+    background-color: $corporate-contrast-dark !important;
+  }
+
+  .background-corporate-primary {
+    background-color: mat-color($color-set-primary-dark, 500);
+  }
+
+  .border {
+    color: mat-color($color-set-border-dark, 500);
+  }
+
+  .border-background {
+    background-color: mat-color($color-set-border-dark, 500);
+  }
+
+  .border-color {
+    border-color: mat-color($color-set-border-dark, 500);
+  }
+
+  .border-corporate-contrast {
+    border-color: $corporate-contrast-dark;
+  }
+
+  .success {
+    color: mat-color($color-set-success-dark, 500);
+  }
+
+  .error {
+    color: mat-color($color-set-error-dark, 500);
+  }
+
+  .suffix-error {
+    color: mat-color($color-set-error-dark, 500);
+  }
+
+  .project-highlight {
+    color: mat-color($color-set-error-dark, 500);
+  }
+
+  .restriction-status {
+    background-color: mat-color($color-set-border-dark, 50);
+
+    .restriction-status-icon {
+      color: $text-secondary-dark;
+    }
+  }
+
+  /* separations lines for directories */
+  .separation-line-headline,
+  .separation-line-header {
+    background-image: linear-gradient(
+      to right,
+      mat-color($color-set-border-dark, 500) 0%,
+      rgba($background-primary-dark, 0)
+    );
+  }
+
+  /* alternative for directory image-header if color or image are missing */
+  .header-image {
+    background-color: $background-primary-dark;
+
+    &.small-header {
+      background-color: transparent;
+    }
+  }
+
+  .active {
+    color: $corporate-contrast-dark;
+    background-color: mat-color($color-set-primary-dark, 500) !important;
+
+    .mat-icon {
+      color: $corporate-contrast-dark !important;
+    }
+  }
+
+  .active-sort,
+  .active-sort:hover {
+    background-color: mat-color($color-set-primary-dark, 100) !important;
+    color: mat-color($color-set-primary-dark, 500) !important;
+  }
+
+  /* svg style for svg-icons with only one color */
+  svg {
+    fill: currentColor;
+
+    g g {
+      fill: currentColor;
+    }
+  }
+
+  .colored-svg {
+    color: mat-color($color-set-primary-dark, 500);
+  }
+
+  .colored-svg-error {
+    color: mat-color($color-set-error-dark, 500);
+  }
+
+  .colored-svg-text-secondary {
+    color: $text-secondary-dark;
+  }
+
+  .colored-svg-corporate-contrast {
+    color: $corporate-contrast-dark;
+  }
+
+  /* dialog image viewer */
+  .plazz-image-viewer {
+    background-color: $background-primary-dark;
+
+    .footer {
+      @include background-opacity($text-primary-bg-dark, 0.7);
+    }
+  }
+
+  /* svg style for multi colored svg files; code directly inside html files */
+  svg.colored {
+    .corporate-primary {
+      fill: mat-color($color-set-primary-dark, 500);
+    }
+
+    .error {
+      fill: mat-color($color-set-error-dark, 500);
+    }
+  }
+
+  .general-menu {
+    a:hover,
+    a:focus {
+      color: $text-primary-dark;
+    }
+
+    .active-menu-item {
+      background-color: mat-color($color-set-primary-dark, 100) !important;
+      color: mat-color($color-set-primary-dark, 500) !important;
+
+      .mat-icon {
+        color: mat-color($color-set-primary-dark, 500) !important;
+      }
+    }
+  }
+
+  .plazz-general-menu-content {
+    .mat-sidenav-container {
+      background-color: $background-primary-dark;
+    }
+
+    .menu-content {
+      color: $text-primary-dark;
+
+      h1,
+      h2 {
+        color: $text-primary-dark;
+      }
+    }
+
+    a.mat-list-item.logout {
+      color: $text-primary-dark;
+    }
+
+    a.mat-list-item .mat-icon {
+      color: $text-primary-dark;
+    }
+
+    a.active-menu-item .mat-list-item-content {
+      background-color: mat-color($color-set-primary-dark, 100);
+      color: mat-color($color-set-primary-dark, 500);
+
+      .mat-icon {
+        color: mat-color($color-set-primary-dark, 500) !important;
+      }
+    }
+  }
+
+  /* Project menu */
+  .tab-menu-container {
+    a.active-menu-item {
+      color: mat-color($color-set-primary-dark, 500);
+
+      &.menu-button-link {
+        background-color: mat-color($color-set-primary-dark, 100);
+      }
+    }
+  }
+
+  .mat-input-element {
+    color: $text-primary-dark !important;
+  }
+
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $corporate-contrast-dark !important;
+  }
+
+  .mat-toolbar {
+    background-color: $background-primary-dark !important;
+  }
+
+  .plazz-toolbar-row {
+    background-image: linear-gradient(
+      $gradient-color-dark-top,
+      $gradient-color-dark-bottom
+    );
+    color: $corporate-contrast-dark;
+  }
+
+  .main-content {
+    background-color: $background-primary-dark;
+  }
+
+  .top-nav-container {
+    background-color: $gradient-color-top;
+    color: $corporate-contrast-dark;
+
+    .mat-fab.mat-accent {
+      background-color: $corporate-contrast-dark;
+    }
+
+    .mat-icon {
+      color: $corporate-contrast-dark;
+    }
+  }
+
+  .project-nav-container {
+    background-color: $background-primary-dark;
+    color: $text-secondary-dark;
+
+    .mat-icon {
+      color: $text-secondary-dark;
+    }
+
+    .mat-fab.mat-accent {
+      background-color: $corporate-contrast-dark;
+    }
+  }
+
+  .project-view-container {
+    background-color: $background-primary-dark;
+
+    .mat-sidenav {
+      .row-menu {
+        color: $text-primary-dark;
+
+        .mat-icon {
+          color: mat-color($color-set-primary-dark, 500);
+        }
+      }
+
+      .folder-list {
+        border-left-color: mat-color($color-set-primary-dark, 500);
+      }
+
+      .divider-only {
+        border-bottom-color: mat-color($color-set-primary-dark, 500);
+      }
+
+      .separator-item .separator,
+      .without-divider {
+        color: mat-color($color-set-primary-dark, 500);
+
+        .divider {
+          border-bottom-color: mat-color($color-set-primary-dark, 500);
+        }
+      }
+    }
+
+    .project-view-content {
+      background-color: $background-primary-dark;
+    }
+
+    .row-menu.active {
+      background-color: mat-color($color-set-primary-dark, 100);
+
+      a {
+        color: mat-color($color-set-primary-dark, 500);
+      }
+    }
+  }
+
+  .profile-container .default-image {
+    background-image: linear-gradient(
+      mat-color($color-set-primary-dark, 200),
+      mat-color($color-set-primary-dark, 500)
+    );
+  }
+
+  .plazz-tab-group {
+    .mat-ink-bar {
+      &:before,
+      &:after {
+        background-color: $background-primary-dark;
+      }
+    }
+  }
+
+  .search-input-container.mat-form-field.mat-focused .mat-form-field-label {
+    color: $text-secondary-dark;
+  }
+
+  .search-input-container.mat-form-field-appearance-legacy {
+    .mat-form-field-underline {
+      background-color: transparent;
+    }
+
+    .mat-icon {
+      color: $text-secondary-dark;
+    }
+  }
+
+  .mat-tab-label {
+    color: mat-color($color-set-primary-dark, 500) !important;
+  }
+
+  .mat-tab-label-active {
+    color: mat-color($color-set-primary-dark, 500);
+    opacity: 0.9 !important;
+  }
+
+  .mat-ink-bar {
+    background-color: mat-color($color-set-secondary-dark, 500) !important;
+  }
+
+  .plazz-snackbar.mat-snack-bar-container {
+    color: $corporate-contrast-dark;
+  }
+
+  .plazz-dialog-fullscreen .mat-dialog-container .header {
+    background-color: $background-primary-dark;
+  }
+
+  .mat-more-menu.mat-menu-panel {
+    color: $text-primary-dark;
+  }
+
+  .menu-folder.mat-menu-panel {
+    background-color: $background-primary-dark;
+
+    .mat-menu-item-submenu-trigger::after {
+      color: mat-color($color-set-primary-dark, 500);
+    }
+  }
+
+  .more-button-container .mat-button[aria-expanded="true"],
+  .folder-button.mat-button[aria-expanded="true"] {
+    color: mat-color($color-set-primary-dark, 500);
+
+    .mat-icon {
+      color: mat-color($color-set-primary-dark, 500);
+    }
+  }
+}
+
+@mixin corporate-color-theme($theme) {
+  @include light-theme($theme);
+}

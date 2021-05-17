@@ -1,0 +1,4 @@
+@import "color-theme";
+
+@include corporate-color-theme($theme);
+@include angular-material-theme($theme);
